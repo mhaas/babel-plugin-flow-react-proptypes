@@ -14,7 +14,7 @@ export type V = U & T;
 
 
 class C extends React.Component {
-  props: U;
+  props: V;
 }
 
 export default C;
