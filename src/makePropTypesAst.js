@@ -76,6 +76,9 @@ function makePropType(data, isExact) {
     isRequired = false;
   }
   else if (method === 'shape') {
+      // For shape, we always recurse. TODO: Likely no good handling for
+      // shape-intersect-runtime, because that is handled one method call above
+      // us already.
     const shapeObjectProperties = data.properties.map(({key, value}) => {
       return t.objectProperty(t.identifier(key), makePropType(value));
     });

@@ -79,6 +79,16 @@ module.exports = function flowReactPropTypes(babel) {
     return false;
   };
 
+    /**
+     * Called when visiting a node.
+     *
+     * Converts the props param to AST and attaches it at the proper location,
+     * depending on the path param.
+     *
+     *
+     * @param path
+     * @param props
+     */
   const annotate = (path, props) => {
     let name;
     let targetPath;
@@ -120,6 +130,14 @@ module.exports = function flowReactPropTypes(babel) {
     targetPath.insertAfter(attachPropTypesAST);
   };
 
+    /**
+     * Visitor for functions.
+     *
+     * Determines if a function is a functional react component and
+     * inserts the proptypes AST via `annotate`.
+     *
+     * @param path
+     */
   const functionVisitor = path => {
     if (!isFunctionalReactComponent(path)) {
       return;
@@ -290,7 +308,15 @@ module.exports = function flowReactPropTypes(babel) {
             const typeName = specifier.type === 'ImportDefaultSpecifier'
               ? specifier.local.name
               : specifier.imported.name;
-
+            // Store the name the type so we can use it later. We do
+            // mark it as importedTypes because we do handle these
+            // differently than internalTypes.
+            // imported types are basically realized as imports;
+            // because we can be somewhat sure that we generated
+            // the proper exported propTypes in the imported file
+            // Later, we will check importedTypes to determine if
+            // we want to put this as a 'raw' type in our internal
+            // representation
             importedTypes[typeName] = getExportNameForType(typeName);
             const variableDeclarationAst = t.variableDeclaration(
               'var',
