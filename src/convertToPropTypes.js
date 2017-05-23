@@ -39,14 +39,8 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
   else if (node.type === 'IntersectionTypeAnnotation') {
     const objectTypeAnnotations = node.types.filter(annotation => annotation.type === 'ObjectTypeAnnotation' || annotation.type === 'GenericTypeAnnotation');
 
-    const shapes = [];
-    objectTypeAnnotations.forEach(node => {
-      const propType = convertToPropTypes(node, importedTypes, internalTypes);
-      // External types have type 'raw', we cannot process these right now.
-      if (propType.type === 'shape') {
-        shapes.push(propType);
-      }
-    });
+    const propTypes = objectTypeAnnotations.map(node => convertToPropTypes(node, importedTypes, internalTypes));
+    const shapes = propTypes.filter(propType => propType.type === 'shape');
     const mergedProperties = [].concat(...shapes.map(propType => propType.properties));
 
     if (mergedProperties.length == 0) {
