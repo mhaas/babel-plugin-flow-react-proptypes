@@ -16,6 +16,11 @@ let importedTypes = {};
 let suppress = false;
 const SUPPRESS_STRING = 'no babel-plugin-flow-react-proptypes';
 
+// General control flow:
+// Parse flow type annotations in index.js
+// Convert to intermediate representation via convertToPropTypes.js
+// Convert to prop-types AST in makePropTypesAst.js
+
 const convertNodeToPropTypes = node => convertToPropTypes(
     node,
     importedTypes,
@@ -93,11 +98,14 @@ module.exports = function flowReactPropTypes(babel) {
       throw new Error(`Did not find type annotation for ${name}`);
     }
 
+
     if (!props.properties) {
       // Bail out if we don't have any properties. This will be the case if
       // we have an imported PropType, like:
       // import type { T } from '../types';
       // const C = (props: T) => <div>{props.name}</div>;
+
+      // TODO: this case is still handled elsewhere, correct?
       return;
     }
 
@@ -205,22 +213,29 @@ module.exports = function flowReactPropTypes(babel) {
       },
 
       // See issue:
+        /**
+         * Processes exported type aliases.
+         *
+         * This function also adds something to the AST directly, instead
+         * of invoking annotate.
+         *
+         * @param path
+         * @constructor
+         */
       ExportNamedDeclaration(path) {
         if (suppress) return;
         const {node} = path;
 
-        let declarationObject;
 
         if (!node.declaration || node.declaration.type !== 'TypeAlias') {
           return;
         }
-        declarationObject = node.declaration.right;
 
-        if (!(node.declaration.right.type === 'IntersectionTypeAnnotation' || node.declaration.right.properties)) {
+        const declarationObject = node.declaration.right;
+
+        if (!(declarationObject.type === 'IntersectionTypeAnnotation' || declarationObject.properties)) {
           return;
         }
-        declarationObject = node.declaration.right;
-
 
         const name = node.declaration.id.name;
         const propTypes = convertNodeToPropTypes(declarationObject);

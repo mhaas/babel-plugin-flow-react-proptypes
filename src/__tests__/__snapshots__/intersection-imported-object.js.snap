@@ -1,9 +1,5 @@
-exports[`test interesection-export 1`] = `
+exports[`test import-object 1`] = `
 "\'use strict\';
-
-Object.defineProperty(exports, \"__esModule\", {
-  value: true
-});
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }
 
@@ -11,15 +7,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require(\'react\');
-
-var babelPluginFlowReactPropTypes_proptype_T = require(\'./T\').babelPluginFlowReactPropTypes_proptype_T || require(\'prop-types\').any;
-
-if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_U\', {
-  value: Object.assign({}, babelPluginFlowReactPropTypes_proptype_T, {
-    foo: require(\'prop-types\').string.isRequired
-  })
-});
+var babelPluginFlowReactPropTypes_proptype_NamedType = require(\'./foo\').babelPluginFlowReactPropTypes_proptype_NamedType || require(\'prop-types\').any;
 
 var C = function (_React$Component) {
   _inherits(C, _React$Component);
@@ -33,8 +21,8 @@ var C = function (_React$Component) {
   return C;
 }(React.Component);
 
-C.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_T, {
-  foo: require(\'prop-types\').string.isRequired
-});
-exports.default = C;"
+C.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType, {
+  foo: require(\'prop-types\').string.isRequired,
+  bar: require(\'prop-types\').number.isRequired
+});"
 `;

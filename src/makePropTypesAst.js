@@ -5,6 +5,38 @@ import template from 'babel-template';
 const USE_PROPTYPES_PACKAGE = true;
 
 export default function makePropTypesAst(propTypeData) {
+    if (propTypeData.type === 'shape-intersect-runtime') {
+        return makePropTypesAstForShapeIntersectRuntime(propTypeData);
+    }
+    else if (propTypeData.type === 'raw') {
+        console.log("propTypeData");
+      return makePropType(propTypeData);
+
+    } else {
+      return makePropTypesAstForShape(propTypeData);
+    }
+};
+
+function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
+    const propTypeObjects = [];
+    propTypeData.properties.forEach(propTypeSpec => {
+        if (propTypeSpec.type === 'raw') {
+            propTypeObjects.push(makePropType(propTypeSpec));
+        } else if (propTypeSpec.type === 'shape') {
+            propTypeObjects.push(makePropTypesAstForShape(propTypeSpec));
+        }
+    });
+
+    return t.callExpression(
+        t.memberExpression(t.identifier('Object'),
+            t.identifier('assign')
+        ),
+        [t.objectExpression([]), ...propTypeObjects]);
+
+}
+
+function makePropTypesAstForShape(propTypeData) {
+    // TODO: this is duplicated with the shape handling below..
   const rootProperties = propTypeData.properties.map(({key, value}) => {
     return t.objectProperty(
       t.identifier(key),
@@ -12,15 +44,18 @@ export default function makePropTypesAst(propTypeData) {
     );
   });
   return t.objectExpression(rootProperties);
-};
+}
 
 function makePropType(data, isExact) {
-  if (data.type === 'exact') {
+
+  const method = data.type;
+
+  if (method === 'exact') {
     data.properties.isRequired = data.isRequired;
     return makePropType(data.properties, true);
   }
 
-  const method = data.type;
+
   let reactNode, node, isRequired;
   if (USE_PROPTYPES_PACKAGE) {
     node = t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);

@@ -41,12 +41,23 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
 
     const propTypes = objectTypeAnnotations.map(node => convertToPropTypes(node, importedTypes, internalTypes));
     const shapes = propTypes.filter(propType => propType.type === 'shape');
+
+    const raw = propTypes.filter(propType => propType.type === 'raw');
+    // To handle raw, we need to generate AST - but we don't really do that here.
+    // We could introduce a 'merge' type, whose value is an array containing
+    // shapes or raw
+    console.log("Got raw propTypes (intermediate representation)", raw);
     const mergedProperties = [].concat(...shapes.map(propType => propType.properties));
 
     if (mergedProperties.length == 0) {
       resultPropType = {type: 'any'};
-    } else {
+    }
+    else if (raw.length === 0) {
       resultPropType = {'type': 'shape', properties: mergedProperties};
+    } else {
+      // TODO: properties may be a misnomer - that probably means a list of object
+        // property specifications
+      resultPropType = {'type': 'shape-intersect-runtime', properties: propTypes};
     }
   }
   // Exact

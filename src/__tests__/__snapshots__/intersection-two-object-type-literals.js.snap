@@ -1,4 +1,4 @@
-exports[`test interesection-two-object-type-literals 1`] = `
+exports[`test intersection-two-object-type-literals 1`] = `
 "\'use strict\';
 
 Object.defineProperty(exports, \"__esModule\", {
