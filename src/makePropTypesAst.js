@@ -5,37 +5,38 @@ import template from 'babel-template';
 const USE_PROPTYPES_PACKAGE = true;
 
 export default function makePropTypesAst(propTypeData) {
-    if (propTypeData.type === 'shape-intersect-runtime') {
-        return makePropTypesAstForShapeIntersectRuntime(propTypeData);
-    }
-    else if (propTypeData.type === 'raw') {
-        console.log("propTypeData");
-      return makePropType(propTypeData);
+  if (propTypeData.type === 'shape-intersect-runtime') {
+    return makePropTypesAstForShapeIntersectRuntime(propTypeData);
+  }
+  else if (propTypeData.type === 'raw') {
+    return makePropType(propTypeData);
 
-    } else {
-      return makePropTypesAstForShape(propTypeData);
-    }
+  }
+  else {
+    return makePropTypesAstForShape(propTypeData);
+  }
 };
 
 function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
-    const propTypeObjects = [];
-    propTypeData.properties.forEach(propTypeSpec => {
-        if (propTypeSpec.type === 'raw') {
-            let propTypeObject = makePropType(propTypeSpec);
+  const propTypeObjects = [];
+  propTypeData.properties.forEach(propTypeSpec => {
+    if (propTypeSpec.type === 'raw') {
+      let propTypeObject = makePropType(propTypeSpec);
             // This will just be a variable, referencing an import we
             // generated above. This variable may contain prop-types.any,
             // which will not work when used in an intersection.
-            const importNode = makePropTypeImportNode();
-            const anyNode =  t.memberExpression(importNode, t.identifier('any'));
-            const testExpression = t.binaryExpression('===', propTypeObject, anyNode);
-            propTypeObject = t.conditionalExpression(testExpression, t.objectExpression([]), propTypeObject);
-            propTypeObjects.push(propTypeObject);
-        } else if (propTypeSpec.type === 'shape') {
-            propTypeObjects.push(makePropTypesAstForShape(propTypeSpec));
-        }
-    });
+      const importNode = makePropTypeImportNode();
+      const anyNode =  t.memberExpression(importNode, t.identifier('any'));
+      const testExpression = t.binaryExpression('===', propTypeObject, anyNode);
+      propTypeObject = t.conditionalExpression(testExpression, t.objectExpression([]), propTypeObject);
+      propTypeObjects.push(propTypeObject);
+    }
+    else if (propTypeSpec.type === 'shape') {
+      propTypeObjects.push(makePropTypesAstForShape(propTypeSpec));
+    }
+  });
 
-    return t.callExpression(
+  return t.callExpression(
         t.memberExpression(t.identifier('Object'),
             t.identifier('assign')
         ),
@@ -56,13 +57,13 @@ function makePropTypesAstForShape(propTypeData) {
 }
 
 function makePropTypeImportNode() {
-    if (USE_PROPTYPES_PACKAGE) {
-        return t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);
-    }
-    else {
-        const reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
-        return t.memberExpression(reactNode, t.identifier('PropTypes'));
-    }
+  if (USE_PROPTYPES_PACKAGE) {
+    return t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);
+  }
+  else {
+    const reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
+    return t.memberExpression(reactNode, t.identifier('PropTypes'));
+  }
 }
 function makePropType(data, isExact) {
 

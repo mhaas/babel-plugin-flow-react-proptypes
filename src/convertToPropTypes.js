@@ -50,7 +50,8 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     }
     else if (raw.length === 0) {
       resultPropType = {'type': 'shape', properties: mergedProperties};
-    } else {
+    }
+    else {
       // TODO: properties may be a misnomer - that probably means a list of object
         // property specifications
       resultPropType = {'type': 'shape-intersect-runtime', properties: propTypes};
