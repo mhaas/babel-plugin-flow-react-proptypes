@@ -43,13 +43,9 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     const shapes = propTypes.filter(propType => propType.type === 'shape');
 
     const raw = propTypes.filter(propType => propType.type === 'raw');
-    // To handle raw, we need to generate AST - but we don't really do that here.
-    // We could introduce a 'merge' type, whose value is an array containing
-    // shapes or raw
-    console.log("Got raw propTypes (intermediate representation)", raw);
     const mergedProperties = [].concat(...shapes.map(propType => propType.properties));
 
-    if (mergedProperties.length == 0) {
+    if (mergedProperties.length === 0 && raw.length === 0) {
       resultPropType = {type: 'any'};
     }
     else if (raw.length === 0) {
