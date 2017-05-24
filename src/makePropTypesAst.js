@@ -45,8 +45,8 @@ function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
 }
 
 function makePropTypesAstForShape(propTypeData) {
-    // TODO: this is almost duplicated with the shape handling below;
-    // but this code does not generate require('prop-types')
+  // TODO: this is almost duplicated with the shape handling below;
+  // but this code does not generate require('prop-types')
   const rootProperties = propTypeData.properties.map(({key, value}) => {
     return t.objectProperty(
       t.identifier(key),
