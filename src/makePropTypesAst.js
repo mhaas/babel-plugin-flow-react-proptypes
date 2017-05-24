@@ -106,6 +106,9 @@ function makePropType(data, isExact) {
       [shapeObjectLiteral]
     );
   }
+  else if (method === 'shape-intersect-runtime') {
+    node = makePropTypesAstForShapeIntersectRuntime(data);
+  }
   else if (method === 'arrayOf') {
     node = t.callExpression(
       t.memberExpression(node, t.identifier('arrayOf')),
