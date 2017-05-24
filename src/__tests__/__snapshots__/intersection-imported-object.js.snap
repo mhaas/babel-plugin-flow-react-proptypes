@@ -1,4 +1,4 @@
-exports[`test import-object 1`] = `
+exports[`test intersection-with-imported-object 1`] = `
 "\'use strict\';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }
@@ -21,7 +21,7 @@ var C = function (_React$Component) {
   return C;
 }(React.Component);
 
-C.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType, {
+C.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
   foo: require(\'prop-types\').string.isRequired,
   bar: require(\'prop-types\').number.isRequired
 });"

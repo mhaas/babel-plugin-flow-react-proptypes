@@ -21,7 +21,15 @@ function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
     const propTypeObjects = [];
     propTypeData.properties.forEach(propTypeSpec => {
         if (propTypeSpec.type === 'raw') {
-            propTypeObjects.push(makePropType(propTypeSpec));
+            let propTypeObject = makePropType(propTypeSpec);
+            // This will just be a variable, referencing an import we
+            // generated above. This variable may contain prop-types.any,
+            // which will not work when used in an intersection.
+            const importNode = makePropTypeImportNode();
+            const anyNode =  t.memberExpression(importNode, t.identifier('any'));
+            const testExpression = t.binaryExpression('===', propTypeObject, anyNode);
+            propTypeObject = t.conditionalExpression(testExpression, t.objectExpression([]), propTypeObject);
+            propTypeObjects.push(propTypeObject);
         } else if (propTypeSpec.type === 'shape') {
             propTypeObjects.push(makePropTypesAstForShape(propTypeSpec));
         }
@@ -46,6 +54,15 @@ function makePropTypesAstForShape(propTypeData) {
   return t.objectExpression(rootProperties);
 }
 
+function makePropTypeImportNode() {
+    if (USE_PROPTYPES_PACKAGE) {
+        return t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);
+    }
+    else {
+        const reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
+        return t.memberExpression(reactNode, t.identifier('PropTypes'));
+    }
+}
 function makePropType(data, isExact) {
 
   const method = data.type;
@@ -55,17 +72,8 @@ function makePropType(data, isExact) {
     return makePropType(data.properties, true);
   }
 
-
-  let reactNode, node, isRequired;
-  if (USE_PROPTYPES_PACKAGE) {
-    node = t.callExpression(t.identifier('require'), [makeLiteral('prop-types')]);
-    isRequired = true;
-  }
-  else {
-    reactNode = t.callExpression(t.identifier('require'), [makeLiteral('react')]);
-    node = t.memberExpression(reactNode, t.identifier('PropTypes'));
-    isRequired = true;
-  }
+  let isRequired = true;
+  let node = makePropTypeImportNode();
 
   if (method === 'any' || method === 'string' || method === 'number' || method === 'bool' || method === 'object' ||
       method === 'array' || method === 'func' || method === 'node') {

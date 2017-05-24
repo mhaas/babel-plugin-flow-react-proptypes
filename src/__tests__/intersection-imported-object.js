@@ -12,7 +12,7 @@ class C extends React.Component {
 }
 `;
 
-it('import-object', () => {
+it('intersection-with-imported-object', () => {
   const res = babel.transform(content, {
     babelrc: false,
     presets: ['es2015', 'stage-1', 'react'],
