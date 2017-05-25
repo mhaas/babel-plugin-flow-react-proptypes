@@ -28,12 +28,9 @@ const convertNodeToPropTypes = node => convertToPropTypes(
 );
 
 const getPropsForTypeAnnotation = typeAnnotation => {
-  $debug("getPropsForTypeAnnotation!");
   const typeAnnotationReference = typeAnnotation.id && typeAnnotation.id.name;
-  $debug("typeAnnotation.type: ", typeAnnotation.type);
   let props = null;
   if (typeAnnotationReference) {
-    $debug("Is typeAnnotationReference!");
     props = internalTypes[typeAnnotationReference] || importedTypes[typeAnnotationReference];
     if (!props) {
       $debug(`Did not find type annotation for reference ${typeAnnotationReference}`);
