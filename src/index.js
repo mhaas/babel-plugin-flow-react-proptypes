@@ -39,7 +39,6 @@ const getPropsForTypeAnnotation = typeAnnotation => {
   else if (typeAnnotation.properties || typeAnnotation.type === 'GenericTypeAnnotation'
       || typeAnnotation.type === 'IntersectionTypeAnnotation'
       || typeAnnotation.type === 'AnyTypeAnnotation') {
-    // TODO: We are probably missing some special handling for intersections here.
     props = convertNodeToPropTypes(typeAnnotation);
   }
   else {
