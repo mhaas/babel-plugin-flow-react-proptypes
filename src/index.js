@@ -39,7 +39,9 @@ const getPropsForTypeAnnotation = typeAnnotation => {
       $debug(`Did not find type annotation for reference ${typeAnnotationReference}`);
     }
   }
-  else if (typeAnnotation.properties || typeAnnotation.type === 'GenericTypeAnnotation' || typeAnnotation.type === 'IntersectionTypeAnnotation') {
+  else if (typeAnnotation.properties || typeAnnotation.type === 'GenericTypeAnnotation'
+      || typeAnnotation.type === 'IntersectionTypeAnnotation'
+      || typeAnnotation.type === 'AnyTypeAnnotation') {
     // TODO: We are probably missing some special handling for intersections here.
     props = convertNodeToPropTypes(typeAnnotation);
   }
