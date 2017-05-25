@@ -28,16 +28,19 @@ const convertNodeToPropTypes = node => convertToPropTypes(
 );
 
 const getPropsForTypeAnnotation = typeAnnotation => {
+  $debug("getPropsForTypeAnnotation!");
   const typeAnnotationReference = typeAnnotation.id && typeAnnotation.id.name;
-
+  $debug("typeAnnotation.type: ", typeAnnotation.type);
   let props = null;
   if (typeAnnotationReference) {
+    $debug("Is typeAnnotationReference!");
     props = internalTypes[typeAnnotationReference] || importedTypes[typeAnnotationReference];
     if (!props) {
       $debug(`Did not find type annotation for reference ${typeAnnotationReference}`);
     }
   }
-  else if (typeAnnotation.properties || typeAnnotation.type || 'GenericTypeAnnotation') {
+  else if (typeAnnotation.properties || typeAnnotation.type === 'GenericTypeAnnotation' || typeAnnotation.type === 'IntersectionTypeAnnotation') {
+    // TODO: We are probably missing some special handling for intersections here.
     props = convertNodeToPropTypes(typeAnnotation);
   }
   else {

@@ -33,6 +33,9 @@ function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
     }
     else if (propTypeSpec.type === 'shape') {
       propTypeObjects.push(makePropTypesAstForShape(propTypeSpec));
+    } else if (propTypeSpec.type === 'shape-intersect-runtime') {
+      // TODO: simplify all of this recursive code?
+      propTypeObjects.push(makePropTypesAstForShapeIntersectRuntime(propTypeSpec));
     }
   });
 

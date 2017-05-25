@@ -42,18 +42,18 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
     const propTypes = objectTypeAnnotations.map(node => convertToPropTypes(node, importedTypes, internalTypes));
     const shapes = propTypes.filter(propType => propType.type === 'shape');
 
-    const raw = propTypes.filter(propType => propType.type === 'raw');
+    const requiresRuntimeMerge = propTypes.filter(propType => propType.type === 'raw' || propType.type === 'shape-intersect-runtime');
     const mergedProperties = [].concat(...shapes.map(propType => propType.properties));
 
-    if (mergedProperties.length === 0 && raw.length === 0) {
+    if (mergedProperties.length === 0 && requiresRuntimeMerge.length === 0) {
       resultPropType = {type: 'any'};
     }
-    else if (raw.length === 0) {
+    else if (requiresRuntimeMerge.length === 0) {
       resultPropType = {'type': 'shape', properties: mergedProperties};
     }
     else {
       // TODO: properties may be a misnomer - that probably means a list of object
-        // property specifications
+      // property specifications
       resultPropType = {'type': 'shape-intersect-runtime', properties: propTypes};
     }
   }
