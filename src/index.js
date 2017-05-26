@@ -252,10 +252,6 @@ module.exports = function flowReactPropTypes(babel) {
 
         const declarationObject = node.declaration.right;
 
-        if (!(declarationObject.type === 'IntersectionTypeAnnotation' || declarationObject.properties)) {
-          return;
-        }
-
         const name = node.declaration.id.name;
         const propTypes = convertNodeToPropTypes(declarationObject);
         internalTypes[name] = propTypes;

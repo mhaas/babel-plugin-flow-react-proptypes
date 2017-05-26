@@ -10,10 +10,11 @@ export default function makePropTypesAst(propTypeData) {
   }
   else if (propTypeData.type === 'raw') {
     return makePropType(propTypeData);
-
   }
-  else {
+  else if (propTypeData.type === 'shape') {
     return makePropTypesAstForShape(propTypeData);
+  } else {
+    return makePropType(propTypeData);
   }
 };
 
