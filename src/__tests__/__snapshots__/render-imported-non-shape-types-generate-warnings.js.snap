@@ -1,0 +1,31 @@
+exports[`test imported-non-shape-generates-warnings: correct types, no warning types given 1`] = `
+Array [
+  Array [
+    "Warning: Failed prop type: Invalid prop \`stringValue\` of type \`string\` supplied to \`C\`, expected \`object\`.
+    in C",
+  ],
+  Array [
+    "Warning: Failed prop type: Invalid prop \`numberValue\` of type \`number\` supplied to \`C\`, expected \`object\`.
+    in C",
+  ],
+]
+`;
+
+exports[`test imported-non-shape-generates-warnings: incorrect types given 1`] = `
+Array [
+  Array [
+    "Warning: Failed prop type: Invalid prop \`stringValue\` of type \`number\` supplied to \`C\`, expected \`object\`.
+    in C",
+  ],
+  Array [
+    "Warning: Failed prop type: Invalid prop \`numberValue\` of type \`string\` supplied to \`C\`, expected \`object\`.
+    in C",
+  ],
+  Array [
+    "Warning: Failed prop type: Invalid prop \`enumStringValue\` of type \`string\` supplied to \`C\`, expected \`object\`.
+    in C",
+  ],
+]
+`;
+
+exports[`test imported-non-shape-generates-warnings: no props given 1`] = `Array []`;

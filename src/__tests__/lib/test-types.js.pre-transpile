@@ -10,3 +10,9 @@ export type NestedType = {
    bar: TestType;
   }
 }
+
+export type StringType = string;
+
+export type NumberType = number;
+
+export type EnumStringType = "yes" | "no";
