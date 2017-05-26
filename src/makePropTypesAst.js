@@ -91,8 +91,9 @@ function makePropType(data, isExact) {
     // In 'raw', we handle variables - typically derived from imported types.
     // These are either objects or functons. Objects are wrapped in a shape;
     // for functions, we assume that the variable already contains a proptype assertion
-    node = t.identifier(data.value);
-    node = t.callExpression(
+
+    const variableNode = t.identifier(data.value);
+    const shapeNode = t.callExpression(
       t.memberExpression(
         t.callExpression(
           t.identifier('require'),
@@ -100,8 +101,10 @@ function makePropType(data, isExact) {
         ),
         t.identifier('shape'),
       ),
-      [node],
+      [variableNode],
     );
+    const objectCheck = t.binaryExpression('===', variableNode, t.callExpression(t.identifier('Object'), [variableNode]));
+    node = t.conditionalExpression(objectCheck, shapeNode, variableNode);
 
     // TODO: what about internal types?
     isRequired = false;

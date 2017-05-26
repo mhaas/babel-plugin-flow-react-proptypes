@@ -29,7 +29,7 @@ if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPlug
 });
 if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_X\", {
   value: Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
-    a: require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType),
+    a: babelPluginFlowReactPropTypes_proptype_NamedType === Object(babelPluginFlowReactPropTypes_proptype_NamedType) ? require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) : babelPluginFlowReactPropTypes_proptype_NamedType,
     b: require(\"prop-types\").string.isRequired
   }, babelPluginFlowReactPropTypes_proptype_DefaultType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_DefaultType, {
     bar: require(\"prop-types\").number.isRequired
@@ -81,9 +81,9 @@ var D = function (_React$Component2) {
 
 D.propTypes = Object.assign({}, {
   c: require(\"prop-types\").string.isRequired,
-  b: require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType)
+  b: babelPluginFlowReactPropTypes_proptype_NamedType === Object(babelPluginFlowReactPropTypes_proptype_NamedType) ? require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) : babelPluginFlowReactPropTypes_proptype_NamedType
 }, Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
-  a: require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType),
+  a: babelPluginFlowReactPropTypes_proptype_NamedType === Object(babelPluginFlowReactPropTypes_proptype_NamedType) ? require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) : babelPluginFlowReactPropTypes_proptype_NamedType,
   b: require(\"prop-types\").string.isRequired
 }, babelPluginFlowReactPropTypes_proptype_DefaultType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_DefaultType, {
   bar: require(\"prop-types\").number.isRequired

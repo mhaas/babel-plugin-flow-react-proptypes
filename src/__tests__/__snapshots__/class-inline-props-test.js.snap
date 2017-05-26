@@ -38,7 +38,7 @@ var Foo = function (_React$Component) {
 
 Foo.propTypes = {
   a_number: require(\'prop-types\').number.isRequired,
-  external: require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_ExternalType)
+  external: babelPluginFlowReactPropTypes_proptype_ExternalType === Object(babelPluginFlowReactPropTypes_proptype_ExternalType) ? require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_ExternalType) : babelPluginFlowReactPropTypes_proptype_ExternalType
 };
 exports.default = Foo;"
 `;
