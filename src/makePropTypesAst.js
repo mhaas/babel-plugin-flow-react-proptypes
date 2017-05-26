@@ -115,10 +115,8 @@ function makePropType(data, isExact) {
         ),
         [variableNode],
     );
-    const objectCheck = t.binaryExpression('===', variableNode, t.callExpression(t.identifier('Object'), [variableNode]));
-    node = t.conditionalExpression(objectCheck, shapeNode, variableNode);
-
-    // TODO: what about internal types?
+    const functionCheck = t.binaryExpression('===', t.unaryExpression('typeof', variableNode), t.stringLiteral('function'));
+    node = t.conditionalExpression(functionCheck, variableNode, shapeNode);
     isRequired = false;
   }
   else if (method === 'shape') {
