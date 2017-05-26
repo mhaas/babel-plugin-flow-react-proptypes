@@ -18,20 +18,20 @@ var babelPluginFlowReactPropTypes_proptype_NamedType = require(\"./types\").babe
 var babelPluginFlowReactPropTypes_proptype_DefaultType = require(\"./types\").babelPluginFlowReactPropTypes_proptype_DefaultType || require(\"prop-types\").any;
 
 if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_T\", {
-  value: require(\"prop-types\").shape({
+  value: {
     foo: require(\"prop-types\").string.isRequired
-  })
+  }
 });
 if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_U\", {
-  value: require(\"prop-types\").shape({
+  value: {
     bar: require(\"prop-types\").number.isRequired
-  })
+  }
 });
 if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_X\", {
-  value: Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
-    a: babelPluginFlowReactPropTypes_proptype_NamedType,
+  value: Object.assign({}, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType), {
+    a: require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType),
     b: require(\"prop-types\").string.isRequired
-  }, babelPluginFlowReactPropTypes_proptype_DefaultType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_DefaultType, {
+  }, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_DefaultType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_DefaultType), {
     bar: require(\"prop-types\").number.isRequired
   }, {
     foo: require(\"prop-types\").string.isRequired
@@ -54,15 +54,15 @@ C.propTypes = {
   qux: require(\"prop-types\").string.isRequired,
   quy: Object.assign({}, {
     foo: require(\"prop-types\").string.isRequired
-  }, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
+  }, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType), {
     XXX: require(\"prop-types\").string.isRequired,
-    YYY: Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
+    YYY: Object.assign({}, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType), {
       ZZZ: require(\"prop-types\").number.isRequired
     }).isRequired
   }).isRequired,
   quz: Object.assign({}, {
     bar: require(\"prop-types\").number.isRequired
-  }, babelPluginFlowReactPropTypes_proptype_DefaultType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_DefaultType).isRequired,
+  }, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_DefaultType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_DefaultType)).isRequired,
   bar: require(\"prop-types\").number.isRequired,
   foo: require(\"prop-types\").string.isRequired
 };
@@ -81,11 +81,11 @@ var D = function (_React$Component2) {
 
 D.propTypes = Object.assign({}, {
   c: require(\"prop-types\").string.isRequired,
-  b: babelPluginFlowReactPropTypes_proptype_NamedType
-}, Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
-  a: babelPluginFlowReactPropTypes_proptype_NamedType,
+  b: require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType)
+}, Object.assign({}, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType), {
+  a: require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType),
   b: require(\"prop-types\").string.isRequired
-}, babelPluginFlowReactPropTypes_proptype_DefaultType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_DefaultType, {
+}, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_DefaultType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_DefaultType), {
   bar: require(\"prop-types\").number.isRequired
 }, {
   foo: require(\"prop-types\").string.isRequired

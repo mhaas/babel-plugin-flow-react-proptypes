@@ -23,5 +23,5 @@ var C = function (_React$Component) {
     return C;
 }(React.Component);
 
-C.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, babelPluginFlowReactPropTypes_proptype_SomeOtherType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_SomeOtherType);"
+C.propTypes = Object.assign({}, require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\'prop-types\').any ? {} : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_NamedType), require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_SomeOtherType) === require(\'prop-types\').any ? {} : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_SomeOtherType));"
 `;

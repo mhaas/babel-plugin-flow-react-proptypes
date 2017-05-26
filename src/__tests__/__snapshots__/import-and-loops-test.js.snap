@@ -14,10 +14,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var babelPluginFlowReactPropTypes_proptype_ExternalType = require(\'../types\').babelPluginFlowReactPropTypes_proptype_ExternalType || require(\'prop-types\').any;
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_T\', {
-    value: require(\'prop-types\').shape({
+    value: {
         flag: require(\'prop-types\').bool.isRequired,
-        list: require(\'prop-types\').arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
-    })
+        list: require(\'prop-types\').arrayOf(require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_ExternalType)).isRequired
+    }
 });
 
 
@@ -40,7 +40,7 @@ var C = function C(_ref) {
 
 C.propTypes = {
     flag: require(\'prop-types\').bool.isRequired,
-    list: require(\'prop-types\').arrayOf(babelPluginFlowReactPropTypes_proptype_ExternalType).isRequired
+    list: require(\'prop-types\').arrayOf(require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_ExternalType)).isRequired
 };
 exports.default = C;"
 `;

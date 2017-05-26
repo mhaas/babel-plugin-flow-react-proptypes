@@ -86,7 +86,22 @@ function makePropType(data, isExact) {
     node = t.memberExpression(node, t.identifier(method));
   }
   else if (method === 'raw') {
+    // In 'raw', we handle variables - typically derived from imported types.
+    // These are either objects or functons. Objects are wrapped in a shape;
+    // for functions, we assume that the variable already contains a proptype assertion
     node = t.identifier(data.value);
+    node = t.callExpression(
+      t.memberExpression(
+        t.callExpression(
+          t.identifier('require'),
+          [t.stringLiteral('prop-types')]
+        ),
+        t.identifier('shape'),
+      ),
+      [node],
+    );
+
+    // TODO: what about internal types?
     isRequired = false;
   }
   else if (method === 'shape') {

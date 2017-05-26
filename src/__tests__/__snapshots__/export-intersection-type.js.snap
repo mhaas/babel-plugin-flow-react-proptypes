@@ -14,10 +14,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \"function\
 var React = require(\'react\');
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_V\', {
-  value: require(\'prop-types\').shape({
+  value: {
     foo: require(\'prop-types\').string.isRequired,
     bar: require(\'prop-types\').string.isRequired
-  })
+  }
 });
 
 var C = function (_React$Component) {

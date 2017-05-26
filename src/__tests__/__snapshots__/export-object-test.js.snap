@@ -2,9 +2,9 @@ exports[`test export-object 1`] = `
 "\'use strict\';
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_Foo\', {
-  value: require(\'prop-types\').shape({
+  value: {
     a_string: require(\'prop-types\').string.isRequired
-  })
+  }
 });
 
 

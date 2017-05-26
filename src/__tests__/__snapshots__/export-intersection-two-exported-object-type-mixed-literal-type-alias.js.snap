@@ -14,15 +14,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \"function\
 var React = require(\'react\');
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_T\', {
-  value: require(\'prop-types\').shape({
+  value: {
     bar: require(\'prop-types\').string.isRequired
-  })
+  }
 });
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_U\', {
-  value: require(\'prop-types\').shape({
+  value: {
     bar: require(\'prop-types\').string.isRequired,
     foo: require(\'prop-types\').string.isRequired
-  })
+  }
 });
 
 var C = function (_React$Component) {

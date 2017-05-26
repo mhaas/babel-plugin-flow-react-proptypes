@@ -260,20 +260,7 @@ module.exports = function flowReactPropTypes(babel) {
         const propTypes = convertNodeToPropTypes(declarationObject);
         internalTypes[name] = propTypes;
 
-        let propTypesAst = makePropTypesAst(propTypes);
-
-        if (propTypesAst.type === 'ObjectExpression') {
-          propTypesAst = t.callExpression(
-            t.memberExpression(
-              t.callExpression(
-                t.identifier('require'),
-                [t.stringLiteral('prop-types')]
-              ),
-              t.identifier('shape'),
-            ),
-            [propTypesAst],
-          );
-        }
+        const propTypesAst = makePropTypesAst(propTypes);
 
         const exportAst = t.expressionStatement(t.callExpression(
           t.memberExpression(t.identifier('Object'), t.identifier('defineProperty')),

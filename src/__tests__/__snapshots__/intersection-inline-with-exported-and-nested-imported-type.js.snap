@@ -10,9 +10,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== \"function\
 var babelPluginFlowReactPropTypes_proptype_NamedType = require(\"./types\").babelPluginFlowReactPropTypes_proptype_NamedType || require(\"prop-types\").any;
 
 if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_ExportedType\", {
-  value: require(\"prop-types\").shape({
+  value: {
     bar: require(\"prop-types\").number.isRequired
-  })
+  }
 });
 
 var MyComponent = function (_React$Component) {
@@ -29,7 +29,7 @@ var MyComponent = function (_React$Component) {
 
 MyComponent.propTypes = {
   foo: require(\"prop-types\").string.isRequired,
-  baz: babelPluginFlowReactPropTypes_proptype_NamedType,
+  baz: require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType),
   bar: require(\"prop-types\").number.isRequired
 };"
 `;

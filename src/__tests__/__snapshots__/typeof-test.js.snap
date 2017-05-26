@@ -6,9 +6,9 @@ var ActionTypes = {
 };
 
 if (typeof exports !== \'undefined\') Object.defineProperty(exports, \'babelPluginFlowReactPropTypes_proptype_JumpToAction\', {
-  value: require(\'prop-types\').shape({
+  value: {
     type: require(\'prop-types\').any.isRequired,
     index: require(\'prop-types\').number.isRequired
-  })
+  }
 });"
 `;
