@@ -9,6 +9,7 @@ import renderer from 'react-test-renderer';
 type FooProps = NestedType & {
   foo: string,
   bar: number,
+  nested_intersection: {a1: string, a2: string } & NestedType & {a3: string} & TestType,
 } & TestType;
 
 class C extends React.Component {
@@ -89,7 +90,25 @@ it('intersection-with-imported-object-generates-warnings: test deeper nested typ
 it('intersection-with-imported-object-generates-warnings: No warnings, all props given correctly', () => {
   const path = require('path');
   // quz.bar.baz must be string, not number
-  const componentRenderCall = 'renderer.create(<C qux={5} quy={{baz: "string"}} quz={{foo: 5, bar: {baz: "string"}}} foo="string" bar={1} baz="string"/>);';
+
+  const componentRenderCall = `
+renderer.create(<C
+    qux={5}
+    quy={ {baz: "string"} }
+    quz={ {foo: 5, bar: {baz: "string"}} }
+    foo="string"
+    bar={1}
+    baz="string"
+    nested_intersection={
+      {a1: "string",
+       a2: "string",
+       qux: 5,
+       quy: { baz: "string"},
+       quz: {foo: 5, bar: { baz: "string" } },
+       a3: "string",
+       baz: "string"}
+    }
+/>);`;
   const fullTest = content + componentRenderCall;
 
   const errorsSeen = utils.getConsoleErrorsForComponent(fullTest, [

@@ -24,8 +24,8 @@ var C = function (_React$Component) {
 C.propTypes = {
   foo: require(\'prop-types\').string.isRequired,
   bar: require(\'prop-types\').number.isRequired,
-  baz: Object.assign({}, {
+  baz: require(\'prop-types\').shape(Object.assign({}, {
     foo: require(\'prop-types\').number.isRequired
-  }, babelPluginFlowReactPropTypes_proptype_NamedType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType).isRequired
+  }, babelPluginFlowReactPropTypes_proptype_NamedType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
 };"
 `;

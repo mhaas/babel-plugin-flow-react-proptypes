@@ -6,7 +6,7 @@ const USE_PROPTYPES_PACKAGE = true;
 
 export default function makePropTypesAst(propTypeData) {
   if (propTypeData.type === 'shape-intersect-runtime') {
-    return makePropTypesAstForShapeIntersectRuntime(propTypeData);
+    return makePropTypesAstForShapeIntersectRuntimeMerge(propTypeData);
   }
   else if (propTypeData.type === 'raw') {
     return makePropType(propTypeData);
@@ -18,35 +18,49 @@ export default function makePropTypesAst(propTypeData) {
 };
 
 function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
+  const runtimeMerge = makePropTypesAstForShapeIntersectRuntimeMerge(propTypeData);
+  // Turn into prop.
+  return t.callExpression(
+      t.memberExpression(
+          makePropTypeImportNode(),
+          t.identifier('shape'),
+      ),
+      [runtimeMerge],
+  );
+
+}
+
+function makePropTypesAstForShapeIntersectRuntimeMerge(propTypeData) {
   const propTypeObjects = [];
   propTypeData.properties.forEach(propTypeSpec => {
     if (propTypeSpec.type === 'raw') {
       let propTypeObject = t.identifier(propTypeSpec.value);
 
-            // This will just be a variable, referencing an import we
-            // generated above. This variable may contain prop-types.any,
-            // which will not work when used in an intersection.
+      // This will just be a variable, referencing an import we
+      // generated above. This variable may contain prop-types.any,
+      // which will not work when used in an intersection.
       const importNode = makePropTypeImportNode();
-      const anyNode =  t.memberExpression(importNode, t.identifier('any'));
+      const anyNode = t.memberExpression(importNode, t.identifier('any'));
       const testExpression = t.binaryExpression('===', propTypeObject, anyNode);
       propTypeObject = t.conditionalExpression(testExpression, t.objectExpression([]), propTypeObject);
       propTypeObjects.push(propTypeObject);
+
     }
     else if (propTypeSpec.type === 'shape') {
       propTypeObjects.push(makePropTypesAstForShape(propTypeSpec));
     }
     else if (propTypeSpec.type === 'shape-intersect-runtime') {
       // TODO: simplify all of this recursive code?
-      propTypeObjects.push(makePropTypesAstForShapeIntersectRuntime(propTypeSpec));
+      // This returns an object.
+      propTypeObjects.push(makePropTypesAstForShapeIntersectRuntimeMerge(propTypeSpec));
     }
   });
-
-  return t.callExpression(
-        t.memberExpression(t.identifier('Object'),
-            t.identifier('assign')
-        ),
-        [t.objectExpression([]), ...propTypeObjects]);
-
+  const runtimeMerge = t.callExpression(
+      t.memberExpression(t.identifier('Object'),
+          t.identifier('assign')
+      ),
+      [t.objectExpression([]), ...propTypeObjects]);
+  return runtimeMerge;
 }
 
 function makePropTypesAstForShape(propTypeData) {
@@ -94,14 +108,11 @@ function makePropType(data, isExact) {
 
     const variableNode = t.identifier(data.value);
     const shapeNode = t.callExpression(
-      t.memberExpression(
-        t.callExpression(
-          t.identifier('require'),
-          [t.stringLiteral('prop-types')]
+        t.memberExpression(
+            makePropTypeImportNode(),
+            t.identifier('shape'),
         ),
-        t.identifier('shape'),
-      ),
-      [variableNode],
+        [variableNode],
     );
     const objectCheck = t.binaryExpression('===', variableNode, t.callExpression(t.identifier('Object'), [variableNode]));
     node = t.conditionalExpression(objectCheck, shapeNode, variableNode);

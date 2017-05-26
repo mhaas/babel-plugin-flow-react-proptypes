@@ -32,6 +32,10 @@ Array [
     in C",
   ],
   Array [
+    "Warning: Failed prop type: The prop \`nested_intersection\` is marked as required in \`C\`, but its value is \`undefined\`.
+    in C",
+  ],
+  Array [
     "Warning: Failed prop type: The prop \`baz\` is marked as required in \`C\`, but its value is \`undefined\`.
     in C",
   ],

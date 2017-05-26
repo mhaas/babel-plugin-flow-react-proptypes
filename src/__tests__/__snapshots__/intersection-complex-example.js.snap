@@ -52,17 +52,17 @@ var C = function (_React$Component) {
 
 C.propTypes = {
   qux: require(\"prop-types\").string.isRequired,
-  quy: Object.assign({}, {
+  quy: require(\"prop-types\").shape(Object.assign({}, {
     foo: require(\"prop-types\").string.isRequired
   }, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
     XXX: require(\"prop-types\").string.isRequired,
-    YYY: Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
+    YYY: require(\"prop-types\").shape(Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
       ZZZ: require(\"prop-types\").number.isRequired
-    }).isRequired
-  }).isRequired,
-  quz: Object.assign({}, {
+    })).isRequired
+  })).isRequired,
+  quz: require(\"prop-types\").shape(Object.assign({}, {
     bar: require(\"prop-types\").number.isRequired
-  }, babelPluginFlowReactPropTypes_proptype_DefaultType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_DefaultType).isRequired,
+  }, babelPluginFlowReactPropTypes_proptype_DefaultType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_DefaultType)).isRequired,
   bar: require(\"prop-types\").number.isRequired,
   foo: require(\"prop-types\").string.isRequired
 };
