@@ -21,7 +21,8 @@ function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
   const propTypeObjects = [];
   propTypeData.properties.forEach(propTypeSpec => {
     if (propTypeSpec.type === 'raw') {
-      let propTypeObject = makePropType(propTypeSpec);
+      let propTypeObject = t.identifier(propTypeSpec.value);
+
             // This will just be a variable, referencing an import we
             // generated above. This variable may contain prop-types.any,
             // which will not work when used in an intersection.
@@ -50,7 +51,8 @@ function makePropTypesAstForShapeIntersectRuntime(propTypeData) {
 
 function makePropTypesAstForShape(propTypeData) {
   // TODO: this is almost duplicated with the shape handling below;
-  // but this code does not generate require('prop-types')
+  // but this code does not generate AST for a shape function,
+  // but returns the AST for the object instead.
   const rootProperties = propTypeData.properties.map(({key, value}) => {
     return t.objectProperty(
       t.identifier(key),

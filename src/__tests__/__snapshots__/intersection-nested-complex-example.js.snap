@@ -16,7 +16,7 @@ var React = require(\'react\');
 var babelPluginFlowReactPropTypes_proptype_NamedType = require(\"./types\").babelPluginFlowReactPropTypes_proptype_NamedType || require(\"prop-types\").any;
 
 if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_X\", {
-   value: Object.assign({}, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType), {
+   value: Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
       a: require(\"prop-types\").string.isRequired
    })
 });
@@ -33,7 +33,7 @@ var D = function (_React$Component) {
    return D;
 }(React.Component);
 
-D.propTypes = Object.assign({}, Object.assign({}, require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\"prop-types\").any ? {} : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType), {
+D.propTypes = Object.assign({}, Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
    a: require(\"prop-types\").string.isRequired
 }), {
    c: require(\"prop-types\").string.isRequired

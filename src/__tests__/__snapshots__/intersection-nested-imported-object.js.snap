@@ -26,6 +26,6 @@ C.propTypes = {
   bar: require(\'prop-types\').number.isRequired,
   baz: Object.assign({}, {
     foo: require(\'prop-types\').number.isRequired
-  }, require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_NamedType) === require(\'prop-types\').any ? {} : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_NamedType)).isRequired
+  }, babelPluginFlowReactPropTypes_proptype_NamedType === require(\'prop-types\').any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType).isRequired
 };"
 `;
