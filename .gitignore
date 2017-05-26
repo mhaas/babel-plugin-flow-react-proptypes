@@ -1,5 +1,6 @@
-lib
+lib/
 node_modules
 *.swp
 npm-debug.log
 .DS_Store
+src/__tests__/lib/test-types.js.transpiled

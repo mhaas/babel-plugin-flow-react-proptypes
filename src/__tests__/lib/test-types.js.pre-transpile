@@ -1,0 +1,12 @@
+/* @flow */
+
+export type TestType = {baz: string};
+
+export type NestedType = {
+  qux: number,
+  quy: TestType,
+  quz: {
+   foo: number,
+   bar: TestType;
+  }
+}
