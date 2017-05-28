@@ -96,7 +96,7 @@ export default function convertToPropTypes(node, importedTypes, internalTypes) {
       resultPropType = {type: 'func'};
     }
     else {
-      resultPropType = {type: 'any'};
+      resultPropType = {type: 'possible-class', value: node.id.name};
     }
   }
   else if (node.type === 'UnionTypeAnnotation') {

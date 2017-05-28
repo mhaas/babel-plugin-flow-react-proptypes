@@ -54,14 +54,19 @@ export function makePropTypesAstForExport(propTypeData) {
 };
 
 
+function makeAnyPropTypeAST() {
+  const importNode = makePropTypeImportNode();
+  const anyNode = t.memberExpression(importNode, t.identifier('any'));
+  return anyNode;
+}
+
 function makeObjectAstForRaw(propTypeSpec, propTypeObjects) {
   let propTypeObject = t.identifier(propTypeSpec.value);
 
   // This will just be a variable, referencing an import we
   // generated above. This variable may contain prop-types.any,
   // which will not work when used in an intersection.
-  const importNode = makePropTypeImportNode();
-  const anyNode = t.memberExpression(importNode, t.identifier('any'));
+  const anyNode = makeAnyPropTypeAST();
   const testExpression = t.binaryExpression('===', propTypeObject, anyNode);
   propTypeObject = t.conditionalExpression(testExpression, t.objectExpression([]), propTypeObject);
   return propTypeObject;
@@ -162,6 +167,9 @@ function makePropTypeImportNode() {
     return t.memberExpression(reactNode, t.identifier('PropTypes'));
   }
 }
+function makeFunctionCheckAST(variableNode) {
+  return t.binaryExpression('===', t.unaryExpression('typeof', variableNode), t.stringLiteral('function'));
+}
 /**
  * Handles all prop types.
  *
@@ -210,7 +218,7 @@ function makePropType(data, isExact) {
         ),
         [variableNode],
     );
-    const functionCheckNode = t.binaryExpression('===', t.unaryExpression('typeof', variableNode), t.stringLiteral('function'));
+    const functionCheckNode = makeFunctionCheckAST(variableNode);
     node = t.conditionalExpression(functionCheckNode, variableNode, shapeNode);
     isRequired = false;
   }
@@ -258,6 +266,16 @@ function makePropType(data, isExact) {
   }
   else if (method === 'void') {
     node = dontSetTemplate().expression;
+  }
+  else if (method === 'possible-class') {
+    const instanceOfNode = t.callExpression(
+        t.memberExpression(node, t.identifier('instanceOf')),
+        [t.identifier(data.value)]
+      );
+    const functionCheckNode = makeFunctionCheckAST(t.identifier(data.value));
+    node = t.conditionalExpression(functionCheckNode, instanceOfNode, makeAnyPropTypeAST());
+    // Don't add .required on the full expression
+    isRequired = false;
   }
   else {
     const bugData = JSON.stringify(data, null, 2);
