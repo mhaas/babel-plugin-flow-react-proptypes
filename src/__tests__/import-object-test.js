@@ -6,6 +6,8 @@ import type DefaultType from './bar';
 type FooProps = {
   an_imported_named_type: NamedType,
   an_imported_default_type: DefaultType,
+  optional_property?: NamedType,
+  can_be_null_property: ?DefaultType,
   a_global_type: Date,
   a_undefined_type: FooBarBaz,
 };
