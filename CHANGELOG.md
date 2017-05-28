@@ -1,3 +1,14 @@
+## NEXT
+
+  - Add support for top-level propTypes assignment of imported types (#88)
+
+## 3.0.0
+
+ - Fix #75: intersection not supported
+ - Fix #71: propTypes are not created if you assign props from a pre-defined
+   type or if you import types from another file
+ - Testcase for #1, known working
+ - Testcase for #19, known working
 
 ## 2.2.1
 
