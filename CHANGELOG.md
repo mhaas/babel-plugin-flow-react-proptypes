@@ -1,6 +1,7 @@
 ## NEXT
 
   - Add support for top-level propTypes assignment of imported types (#88)
+  - Add support for instanceOf (see PR #6, #92)
 
 ## 3.0.0
 
