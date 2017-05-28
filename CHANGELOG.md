@@ -2,6 +2,7 @@
 
   - Add support for top-level propTypes assignment of imported types (#88)
   - Add support for instanceOf (see PR #6, #92)
+  - Fix isRequired for imported types (if they are not functions)
 
 ## 3.0.0
 
