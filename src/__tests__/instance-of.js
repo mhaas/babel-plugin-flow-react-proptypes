@@ -9,6 +9,8 @@ class MyComponent extends React.Component {
     props: {
       some_class: SomeClass,
       some_other_class: SomeOtherClass,
+      key_can_be_omitted?: SomeClass,
+      value_can_be_null: ?SomeOtherClass,
     }
 }
 `;

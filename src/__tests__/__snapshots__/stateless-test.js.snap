@@ -21,7 +21,7 @@ Foo.propTypes = {
   a_boolean: require(\'prop-types\').bool.isRequired,
   a_generic_object: require(\'prop-types\').object.isRequired,
   array_of_strings: require(\'prop-types\').arrayOf(require(\'prop-types\').string).isRequired,
-  instance_of_Bar: require(\'prop-types\').any.isRequired,
+  instance_of_Bar: typeof Bar === \'function\' ? require(\'prop-types\').instanceOf(Bar).isRequired : require(\'prop-types\').any.isRequired,
   anything: require(\'prop-types\').any.isRequired,
   one_of: require(\'prop-types\').oneOf([\'QUACK\', \'BARK\', 5]).isRequired,
   onw_of_type: require(\'prop-types\').oneOfType([require(\'prop-types\').number, require(\'prop-types\').string]).isRequired,
