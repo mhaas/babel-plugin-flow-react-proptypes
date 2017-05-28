@@ -24,8 +24,8 @@ var C = function (_React$Component) {
 }(React.Component);
 
 C.propTypes = {
-  an_imported_named_type: typeof babelPluginFlowReactPropTypes_proptype_NamedType === \'function\' ? babelPluginFlowReactPropTypes_proptype_NamedType : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_NamedType),
-  an_imported_default_type: typeof babelPluginFlowReactPropTypes_proptype_DefaultType === \'function\' ? babelPluginFlowReactPropTypes_proptype_DefaultType : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_DefaultType),
+  an_imported_named_type: typeof babelPluginFlowReactPropTypes_proptype_NamedType === \'function\' ? babelPluginFlowReactPropTypes_proptype_NamedType : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
+  an_imported_default_type: typeof babelPluginFlowReactPropTypes_proptype_DefaultType === \'function\' ? babelPluginFlowReactPropTypes_proptype_DefaultType : require(\'prop-types\').shape(babelPluginFlowReactPropTypes_proptype_DefaultType).isRequired,
   a_global_type: typeof Date === \'function\' ? require(\'prop-types\').instanceOf(Date).isRequired : require(\'prop-types\').any.isRequired,
   a_undefined_type: typeof FooBarBaz === \'function\' ? require(\'prop-types\').instanceOf(FooBarBaz).isRequired : require(\'prop-types\').any.isRequired
 };

@@ -33,7 +33,7 @@ var D = function (_React$Component) {
 
 D.propTypes = Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, {
   foo: require(\"prop-types\").number.isRequired,
-  bar: typeof babelPluginFlowReactPropTypes_proptype_NamedType === \"function\" ? babelPluginFlowReactPropTypes_proptype_NamedType : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType),
+  bar: typeof babelPluginFlowReactPropTypes_proptype_NamedType === \"function\" ? babelPluginFlowReactPropTypes_proptype_NamedType : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
   baz: require(\"prop-types\").shape(Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, babelPluginFlowReactPropTypes_proptype_OtherNamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_OtherNamedType, {
     foo: require(\"prop-types\").oneOf([\"number\"]).isRequired,
     bar: require(\"prop-types\").shape(Object.assign({}, babelPluginFlowReactPropTypes_proptype_NamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_NamedType, babelPluginFlowReactPropTypes_proptype_OtherNamedType === require(\"prop-types\").any ? {} : babelPluginFlowReactPropTypes_proptype_OtherNamedType)).isRequired

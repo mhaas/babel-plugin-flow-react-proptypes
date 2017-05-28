@@ -29,7 +29,7 @@ var MyComponent = function (_React$Component) {
 
 MyComponent.propTypes = {
   foo: require(\"prop-types\").string.isRequired,
-  baz: typeof babelPluginFlowReactPropTypes_proptype_NamedType === \"function\" ? babelPluginFlowReactPropTypes_proptype_NamedType : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType),
+  baz: typeof babelPluginFlowReactPropTypes_proptype_NamedType === \"function\" ? babelPluginFlowReactPropTypes_proptype_NamedType : require(\"prop-types\").shape(babelPluginFlowReactPropTypes_proptype_NamedType).isRequired,
   bar: require(\"prop-types\").number.isRequired
 };"
 `;

@@ -214,13 +214,16 @@ function makePropType(data, isExact) {
     // These are either - at run-time - objects or functions. Objects are wrapped in a shape;
     // for functions, we assume that the variable already contains a proptype assertion
     const variableNode = t.identifier(data.value);
-    const shapeNode = t.callExpression(
+    let shapeNode = t.callExpression(
         t.memberExpression(
             makePropTypeImportNode(),
             t.identifier('shape'),
         ),
         [variableNode],
     );
+    if (data.isRequired) {
+      shapeNode = markNodeAsRequired(shapeNode);
+    }
     const functionCheckNode = makeFunctionCheckAST(variableNode);
     node = t.conditionalExpression(functionCheckNode, variableNode, shapeNode);
   }
