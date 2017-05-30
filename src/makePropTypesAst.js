@@ -173,6 +173,25 @@ function makeFunctionCheckAST(variableNode) {
 function markNodeAsRequired(node) {
   return t.memberExpression(node, t.identifier('isRequired'));
 }
+
+function processQualifiedTypeIdentifierIntoMemberExpression(qualifiedTypeIdentifier) {
+  const qualification = qualifiedTypeIdentifier.qualification;
+
+  let objectAST;
+  if (qualification.type === 'QualifiedTypeIdentifier') {
+    objectAST = processQualifiedTypeIdentifierIntoMemberExpression(qualification);
+  }
+  else if (qualification.type === 'Identifier') {
+    objectAST = t.identifier(qualification.name);
+  }
+  else {
+    throw new Error('Cannot handle type of qualification property:', qualification);
+  }
+  const propertyAST = t.identifier(qualifiedTypeIdentifier.id.name);
+  return t.memberExpression(objectAST, propertyAST);
+
+}
+
 /**
  * Handles all prop types.
  *
@@ -275,18 +294,28 @@ function makePropType(data, isExact) {
   }
   else if (method === 'possible-class') {
     markFullExpressionAsRequired = false;
-
+    let classSpec;
+    if (data.value.name != null) {
+      classSpec = t.identifier(data.value.name);
+    }
+    else if (data.value.type === 'QualifiedTypeIdentifier') {
+      classSpec = processQualifiedTypeIdentifierIntoMemberExpression(data.value);
+    }
+    else {
+      throw new Error('Unknown node type in possible-class for node:', data.value);
+    }
     let instanceOfNode = t.callExpression(
         t.memberExpression(node, t.identifier('instanceOf')),
-        [t.identifier(data.value)]
-      );
+        [classSpec]
+    );
     let anyNode = makeAnyPropTypeAST();
     if (data.isRequired) {
       instanceOfNode = markNodeAsRequired(instanceOfNode);
       anyNode = markNodeAsRequired(anyNode);
     }
-    const functionCheckNode = makeFunctionCheckAST(t.identifier(data.value));
+    const functionCheckNode = makeFunctionCheckAST(classSpec);
     node = t.conditionalExpression(functionCheckNode, instanceOfNode, anyNode);
+
     // Don't add .required on the full expression; we already handled this ourselves
     // for any proptypes we generated
   }
