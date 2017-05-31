@@ -1,0 +1,14 @@
+exports[`test issue 66 1`] = `
+"\"use strict\";
+
+Object.defineProperty(exports, \"__esModule\", {
+  value: true
+});
+
+exports.default = function (url, options) {
+  var Html = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DefaultHtml;
+
+
+  return React.createElement(\"div\", null);
+};"
+`;

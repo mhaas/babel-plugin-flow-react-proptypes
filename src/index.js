@@ -35,6 +35,9 @@ const getPropsForTypeAnnotation = typeAnnotation => {
       || typeAnnotation.type === 'AnyTypeAnnotation') {
     props = convertNodeToPropTypes(typeAnnotation);
   }
+  else if (typeAnnotation.properties != null || typeAnnotation.type != null) {
+    $debug('typeAnnotation not of expected type, not generating propTypes: ', typeAnnotation);
+  }
   else {
     throw new Error(`Expected prop types, but found none. This is a bug in ${PLUGIN_NAME}`);
   }
