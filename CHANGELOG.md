@@ -1,3 +1,6 @@
+## NEXT
+  - Fix error on attempted propTypes generation for non-component function (#66)
+
 ## 3.1.2
   -  Fix bug with functions defaulting to react components (#97)
 
