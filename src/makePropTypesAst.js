@@ -170,6 +170,11 @@ function makePropTypeImportNode() {
 function makeFunctionCheckAST(variableNode) {
   return t.binaryExpression('===', t.unaryExpression('typeof', variableNode), t.stringLiteral('function'));
 }
+
+function makeNullCheckAST(variableNode) {
+  return t.binaryExpression('==', variableNode, t.nullLiteral());
+}
+
 function markNodeAsRequired(node) {
   return t.memberExpression(node, t.identifier('isRequired'));
 }
@@ -188,7 +193,10 @@ function processQualifiedTypeIdentifierIntoMemberExpression(qualifiedTypeIdentif
     throw new Error('Cannot handle type of qualification property:', qualification);
   }
   const propertyAST = t.identifier(qualifiedTypeIdentifier.id.name);
-  return t.memberExpression(objectAST, propertyAST);
+
+  const memberExpression = t.memberExpression(objectAST, propertyAST);
+
+  return t.conditionalExpression(makeNullCheckAST(memberExpression), t.objectExpression([]), memberExpression)
 
 }
 
