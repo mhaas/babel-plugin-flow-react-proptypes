@@ -1,3 +1,6 @@
+## 3.1.2
+  -  Fix bug with functions defaulting to react components (#97)
+
 ## 3.1.0
 
   - Add support for top-level propTypes assignment of imported types (#88)
