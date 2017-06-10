@@ -16,3 +16,12 @@ export type StringType = string;
 export type NumberType = number;
 
 export type EnumStringType = "yes" | "no";
+
+export type SomeNestedType = {
+	a: string,
+	b: string,
+	nestedProperty: {
+		d: string,
+		e: string
+	}
+};

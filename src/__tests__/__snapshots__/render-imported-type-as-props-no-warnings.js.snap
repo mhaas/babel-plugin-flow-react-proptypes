@@ -1,0 +1,16 @@
+exports[`test imported-object-type-can-be-used-as-props: no warnings 1`] = `
+Array [
+  Array [
+    "Warning: Failed prop type: The prop \`a\` is marked as required in \`App\`, but its value is \`undefined\`.
+    in App",
+  ],
+  Array [
+    "Warning: Failed prop type: The prop \`b\` is marked as required in \`App\`, but its value is \`undefined\`.
+    in App",
+  ],
+  Array [
+    "Warning: Failed prop type: The prop \`nestedProperty\` is marked as required in \`App\`, but its value is \`undefined\`.
+    in App",
+  ],
+]
+`;
