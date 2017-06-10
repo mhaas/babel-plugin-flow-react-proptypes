@@ -48,6 +48,7 @@ export function makePropTypesAstForPropTypesAssignment(propTypeData) {
 export function makePropTypesAstForExport(propTypeData) {
   let ast = makePropTypesAstForPropTypesAssignment(propTypeData);
   if (ast == null) {
+    propTypeData.isRequired = !propTypeData.optional;
     ast = makePropType(propTypeData);
   }
   return ast;

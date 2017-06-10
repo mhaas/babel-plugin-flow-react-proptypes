@@ -2,6 +2,6 @@ exports[`test export-non-object-types 1`] = `
 "\"use strict\";
 
 if (typeof exports !== \"undefined\") Object.defineProperty(exports, \"babelPluginFlowReactPropTypes_proptype_Answer\", {
-  value: require(\"prop-types\").oneOf([\"Yes\", \"No\"])
+  value: require(\"prop-types\").oneOf([\"Yes\", \"No\"]).isRequired
 });"
 `;
