@@ -315,7 +315,7 @@ function makePropType(data, isExact) {
   else if (method === 'oneOfType') {
     node = t.callExpression(
       t.memberExpression(node, t.identifier('oneOfType')),
-      [t.arrayExpression(data.options.map(makePropType))]
+      [t.arrayExpression(data.options.map(item => makePropType(item)))]
     );
   }
   else if (method === 'void') {

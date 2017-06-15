@@ -31,23 +31,7 @@ Foo.propTypes = {
   union: require('prop-types').oneOfType([require('prop-types').shape({
     a: require('prop-types').string.isRequired
   }), require('prop-types').shape({
-    b: require('prop-types').number.isRequired,
-    __exact__: function __exact__(values, prop, displayName) {
-      var props = {
-        b: true
-      };
-      var extra = [];
-
-      for (var k in values) {
-        if (values.hasOwnProperty(k) && !props.hasOwnProperty(k)) {
-          extra.push(k);
-        }
-      }
-
-      if (extra.length > 0) {
-        return new Error('Invalid additional prop(s) ' + JSON.stringify(extra));
-      }
-    }
+    b: require('prop-types').number.isRequired
   })]).isRequired
 };
 exports.default = C;"
